@@ -11,3 +11,10 @@
 body{
   font-family: 'Space Mono', monospace;
 }
+
+@media screen and (min-width: 400px) {
+  .custom-height {
+    height:1062px ;
+  }
+
+}

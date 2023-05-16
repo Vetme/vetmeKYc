@@ -778,7 +778,7 @@ const Process = () => {
           </TabPanel>
           <TabPanel className="relative">
             <div className="absolute">
-              <div className="mb-16 h-[1020px] lg:h-[500px]">
+              <div className="custom-height mb-16 h-[1020px] lg:h-[500px]">
                 <span className="text-[#170728] uppercase block mb-4">
                   Personal Information
                 </span>
