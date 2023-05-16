@@ -1,0 +1,27 @@
+.document-tabs--selected{
+background-color: #170728 !important;
+color: #FFFFFF;
+}
+
+.main-tabs--selected{
+    /* border: 1px solid #453953; */
+    /* border-top: 1; */
+    /* border-radius: 10px; */
+    /* height: 100%; */
+    /* display: flex; */
+    /* align-items: center; */
+    outline: none;
+}
+
+
+.tabs-custom{
+    min-width: max-content;
+}
+
+
+@media screen and (max-width: 640px) {
+.tablist-custom{
+    width: 90vw;
+}
+
+}
