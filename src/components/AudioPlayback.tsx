@@ -10,12 +10,8 @@ interface Props {
 const AudioPlayback = ({ fileName, date, time, duration }: Props) => {
   return (
     <div className="mb-4">
-      <img
-        src="shape10.png"
-        alt=""
-        className="absolute left-[50px] w-[340px]"
-      />
-      <div className="flex items-center justify-between gap-3 h-[90px] w-[300px] relative top-3 left-[80px]">
+      <img src="shape10.png" alt="" className="absolute w-[340px]" />
+      <div className="flex items-center justify-between gap-3 h-[90px] w-[300px] relative top-3 left-[30px]">
         <div className="flex gap-4">
           <div className="bg-[#7DA9FF] h-9 w-9 rounded-full flex justify-center items-center">
             <BiPlay size="19" />
