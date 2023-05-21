@@ -136,9 +136,9 @@ const Process = () => {
           </div>
         </div>
       )}
-      <div className="flex flex-col items-center w-full gap-4 h-[4000px]">
+      <div className="flex flex-col items-center w-full gap-4">
         <Tabs className="pt-6" selectedTabClassName="main-tabs--selected">
-          <TabList className="tablist-custom flex gap-2 items-center  mb-6 border border-[#453953] px-3 h-[50px] overflow-x-scroll">
+          <TabList className="tablist-custom flex gap-2 items-center  mb-6 border px-3 h-[50px] overflow-x-scroll">
             <Tab className="tabs-custom">Personal Information</Tab>
             <Tab className="tabs-custom">Identification</Tab>
             <Tab className="tabs-custom">Biometric</Tab>

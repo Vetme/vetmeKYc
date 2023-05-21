@@ -2,8 +2,8 @@ import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 
 const Sidebar = () => {
   return (
-    <div className="hidden lg:block bg-[#EFF1EA] border border-[#453953] rounded-[10px] min-h-[500px] w-[322px]">
-      <div className="relative flex flex-col h-[500px] justify-center items-start px-3 gap-5">
+    <div className="hidden lg:block  bg-[#EFF1EA] border border-[#453953] rounded-[10px] h-[500px] min-h-[500px] w-[322px]">
+      <div className="relative flex flex-col h-full justify-center items-start px-3 gap-5">
         <img src="/shape1.png" alt="" />
         <img
           src="/user.png"

@@ -5,6 +5,7 @@ import Sidebar from "./Sidebar";
 import DashboardLeftSidebar from "./DashboardLeftSidebar";
 import DashboardRightSidebar from "./DashboardRightSidebar";
 import DashboardNavbar from "./DashboardNavbar";
+import "./css/style.css";
 
 interface LayoutProps {
   children: ReactNode;
@@ -15,10 +16,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     <>
       <div className="container mx-auto">
         <DashboardNavbar />
-        <div
-          className="grid gap-5"
-          style={{ gridTemplateColumns: "20% 50% 30%" }}
-        >
+        <div className="grid gap-5 dashboard-layout">
           <DashboardLeftSidebar />
           {children}
           <DashboardRightSidebar />

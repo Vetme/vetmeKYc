@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Layout from "../components/layout/Layout";
 import LayeredBtn from "../components/utils/LayeredBtn";
 import TextInput from "../components/utils/TextInput";
+import TextInput3 from "../components/utils/TextInput3";
 
 const Login = () => {
   return (
@@ -12,11 +13,23 @@ const Login = () => {
           <img
             src="/base.png"
             alt=""
-            className="w-4/5 lg:w-full mt-10 lg:mt-3 mx-auto h-[480px]"
+            className="w-[95%] lg:w-full mt-10 lg:mt-3 mx-auto h-[480px]"
           />
-          <div className="flex items-center flex-col absolute top-[96px] left-[0px] lg:-left-[4px]">
-            <TextInput label="Name" />
-            <TextInput label="Password" />
+          <div className="flex items-center flex-col absolute top-[96px] left-[7px] lg:-left-[4px]">
+            <div className="relative left-4">
+              <TextInput3
+                label="Name"
+                inputCustomClassNames="w-[40%] lg:w-[78%] left-[39%] lg:left-[49%]"
+                shapeCustomClassNames="w-[87%] lg:w-[90%]"
+                labelCustomClassNames="left-[29px] lg:left-[33px]"
+              />
+              <TextInput3
+                label="Password"
+                inputCustomClassNames="w-[40%] lg:w-[78%] left-[39%] lg:left-[49%]"
+                shapeCustomClassNames="w-[87%] lg:w-[90%]"
+                labelCustomClassNames="left-[29px] lg:left-[33px]"
+              />
+            </div>
             <span className="text-[#8C8C8C] text-xs text-center lg:text-left block mb-4 w-[60%]  lg:w-auto">
               Password must be at least 6 characters
             </span>

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Layout from "../components/layout/Layout";
 import LayeredBtn from "../components/utils/LayeredBtn";
 import TextInput from "../components/utils/TextInput";
+import TextInput3 from "../components/utils/TextInput3";
 
 const Signup = () => {
   return (
@@ -14,11 +15,26 @@ const Signup = () => {
             alt=""
             className="w-4/5 lg:w-full mx-auto h-[500px]"
           />
-          <div className="flex items-center flex-col absolute top-[56px] left-[3px] lg:left-[0px]">
-            <TextInput label="Name" />
-            <TextInput label="Email" />
-            <TextInput label="Password" />
-            <span className="text-[#8C8C8C] text-xs text-center lg:text-left block mb-4 w-[60%]  lg:w-auto">
+          <div className="flex items-center flex-col absolute top-[56px] left-[64px] lg:left-[29px]">
+            <TextInput3
+              label="Name"
+              inputCustomClassNames="w-[40%] lg:w-[78%] left-[39%] lg:left-[49%]"
+              shapeCustomClassNames="w-[78%] lg:w-[90%]"
+              labelCustomClassNames="left-[29px] lg:left-[33px]"
+            />
+            <TextInput3
+              label="Email"
+              inputCustomClassNames="w-[40%] lg:w-[78%] left-[39%] lg:left-[49%]"
+              shapeCustomClassNames="w-[78%] lg:w-[90%]"
+              labelCustomClassNames="left-[29px] lg:left-[33px]"
+            />
+            <TextInput3
+              label="Password"
+              inputCustomClassNames="w-[40%] lg:w-[78%] left-[39%] lg:left-[49%]"
+              shapeCustomClassNames="w-[78%] lg:w-[90%]"
+              labelCustomClassNames="left-[29px] lg:left-[33px]"
+            />
+            <span className="text-[#8C8C8C] text-xs text-center -mt-4 lg:-mt-2 -ml-[64px] lg:-ml-7 lg:text-left block mb-4 w-[60%]  lg:w-auto">
               Password must be at least 6 characters
             </span>
             <div className="w-full">
@@ -27,7 +43,7 @@ const Signup = () => {
                   bgColor="#BEFECD"
                   width="90%"
                   height="63px"
-                  parentClassNames="left-[30px] mb-4"
+                  parentClassNames="left-[3px] mb-4"
                   linkTo="" // pass the path here
                 >
                   <span className="text-[#170728]">Continue</span>
@@ -39,9 +55,9 @@ const Signup = () => {
               <div className="block lg:hidden">
                 <LayeredBtn
                   bgColor="#BEFECD"
-                  width="60%"
+                  width="80%"
                   height="63px"
-                  parentClassNames="left-[75px] mb-4"
+                  parentClassNames="-left-[1px] mb-4"
                   linkTo="" // pass the path here
                 >
                   <span className="text-[#170728]">Continue</span>
@@ -55,7 +71,7 @@ const Signup = () => {
                   bgColor="#FFFFFF"
                   width="90%"
                   height="63px"
-                  parentClassNames="left-[30px]"
+                  parentClassNames="left-[3px]"
                   linkTo="" // pass the path here
                 >
                   <img src="/google.png" alt="" />
@@ -65,9 +81,9 @@ const Signup = () => {
               <div className="lg:hidden block">
                 <LayeredBtn
                   bgColor="#FFFFFF"
-                  width="60%"
+                  width="80%"
                   height="63px"
-                  parentClassNames="left-[75px]"
+                  parentClassNames="-left-[1px]"
                   linkTo="" // pass the path here
                 >
                   <img src="/google.png" alt="" className="w-4" />

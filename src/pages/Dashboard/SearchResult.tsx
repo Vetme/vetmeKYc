@@ -31,9 +31,10 @@ const SearchResult = () => {
           <div className="absolute top-1 w-full grid items-center p-3 text-[14px] text-[#453953] border border-[#453953] h-[54px] rounded-xl"></div>
         </div>
 
-        <div className="w-full relative top-5 my-3 h-[40px]">
+        <div className="w-full relative top-5 my-3 h-[40px] overflow-y-scroll">
           <div
-            className="absolute w-full bg-white z-10 grid items-center p-3 text-[14px] text-[#453953] border border-[#453953] h-[54px] rounded-xl"
+            className="absolute w-full bg-white z-10 grid items-center p-3 text-[14px] text-[#453953] 
+            border border-[#453953] h-[54px] rounded-xl overflow-x-scroll"
             style={{ gridTemplateColumns: "15% 20% 25% 20% 20%" }}
           >
             <img src="/user.png" alt="" className="w-8" />

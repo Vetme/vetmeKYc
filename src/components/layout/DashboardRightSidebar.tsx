@@ -6,7 +6,7 @@ import LayeredBtn from "../utils/LayeredBtn";
 
 const DashboardLeftSidebar = () => {
   return (
-    <div className="bg-[#EFF1EA] border border-[#453953] rounded-[10px] p-6 min-h-[1000px] max-w-[322px]">
+    <div className="hidden lg:block bg-[#EFF1EA] border border-[#453953] rounded-[10px] p-6 min-h-[1000px] max-w-[322px]">
       <div className="relative  h-[500px] text-center text-[#170728]">
         <img
           src="/shape1.png"

@@ -7,7 +7,7 @@ import { TbCloudDownload } from "react-icons/tb";
 const Index = () => {
   return (
     <DashboardLayout>
-      <div className="flex gap-4">
+      <div className="grid dashboard-layout_ gap-4">
         <div className="flex flex-col gap-4">
           <div className="flex flex-col gap-1 border border-[#170728] p-6 rounded-[12px] min-h-[240px]">
             <img src="graph.png" alt="" />

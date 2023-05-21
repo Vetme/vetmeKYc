@@ -1,0 +1,29 @@
+.dashboard-layout{
+    grid-template-columns: 20% 50% 30%;
+        
+            
+}
+
+
+.dashboard-layout_ {
+    grid-template-columns: 1fr 1fr;
+
+}
+
+.grid-company{
+    grid-template-columns: 65% 35%;
+}
+
+@media (max-width: 640px) {
+.dashboard-layout {
+    grid-template-columns: 1fr;
+    margin: 0 20px;
+    }
+
+    .dashboard-layout_ {
+        grid-template-columns: 1fr;
+    }
+    .grid-company {
+        grid-template-columns: 1fr;
+    }
+}

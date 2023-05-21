@@ -33,7 +33,7 @@ const LayeredBtn = ({
       ></div>
       <div
         className={`flex items-center gap-3 justify-center uppercase
-           border border-[#2E203E] rounded-[14px] absolute left-[4px] -top-[4px]`}
+           border border-[#2E203E] rounded-[14px] absolute left-[4px] -top-[4px] hover:top-[4px] hover:left-2px`}
         style={{
           backgroundColor: `${bgColor}`,
           width: `${width}`,

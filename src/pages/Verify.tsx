@@ -12,10 +12,10 @@ const Verify = () => {
           <img
             src="/base.png"
             alt=""
-            className="w-4/5 lg:w-full mt-10 lg:mt-3 mx-auto h-[480px]"
+            className="w-[95%] lg:w-full mt-10 lg:mt-3 mx-auto h-[480px]"
           />
-          <div className="flex items-center flex-col absolute top-[80px] left-[45px]">
-            <span className="text-[#8C8C8C] text-xs text-left block mb-8">
+          <div className="flex items-center flex-col absolute top-[80px] left-[10px]">
+            <span className="text-[#8C8C8C] text-xs text-center lg:text-left block mb-8 w-11/12 lg:w-full">
               Enter the 4 digit otp sent to your email address
             </span>
             <div className="flex justify-center mb-8">

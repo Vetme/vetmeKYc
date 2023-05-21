@@ -5,7 +5,7 @@ import TextInput from "../../components/utils/TextInput";
 const Settings = () => {
   return (
     <DashboardLayout>
-      <div className="flex gap-4"></div>
+      <div className="flex gap-4 h-screen"></div>
     </DashboardLayout>
   );
 };
