@@ -8,6 +8,7 @@ interface Props {
   linkTo?: string;
   parentClassNames?: string;
   children: ReactNode;
+  lDir?: string;
 }
 
 const LayeredBtn = ({
@@ -17,6 +18,7 @@ const LayeredBtn = ({
   linkTo = "#",
   children,
   parentClassNames,
+  lDir,
 }: Props) => {
   return (
     <Link
@@ -33,7 +35,9 @@ const LayeredBtn = ({
       ></div>
       <div
         className={`flex items-center gap-3 justify-center uppercase
-           border border-[#2E203E] rounded-[14px] absolute left-[4px] -top-[4px] hover:top-[4px] hover:left-2px`}
+           border border-[#2E203E] rounded-[14px] absolute -top-[4px]  ${
+             lDir == "right" ? "right-[4px]" : "left-[4px]"
+           }`}
         style={{
           backgroundColor: `${bgColor}`,
           width: `${width}`,
