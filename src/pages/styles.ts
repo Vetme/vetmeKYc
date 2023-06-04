@@ -145,6 +145,7 @@ export const PInner = styled.div``;
 
 export const ReadySection = styled.div`
   padding-bottom: 100px;
+          <Spacer height={50} width={20} />
   @media (max-width: 640px) {
     /* display: none; */
   }

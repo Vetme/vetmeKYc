@@ -191,3 +191,22 @@ export const Item = styled.div<{ value: string }>`
     border-radius: 0px 0px 10px 10px;
   }
 `;
+export const MobileMenu = styled.div`
+  position: relative;
+  background: #fff;
+  width: 100%;
+  position: absolute;
+  top: 99px;
+`;
+
+export const MItem = styled.a`
+  font-size: 20px;
+  font-weight: 400;
+  padding: 20px 20px;
+  color: #170728;
+  transition: transform 0.5s ease;
+  font-family: "Space Grotesk", sans-serif;
+  display: block;
+  position: relative;
+  cursor: pointer;
+`;

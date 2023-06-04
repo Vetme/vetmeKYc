@@ -105,7 +105,7 @@ const Home = () => {
   return (
     <HomeLayout>
       {/* Hero Section */}
-      <Hero>
+      <Hero id="solutions">
         <div className="container">
           <div className="wrapper">
             <Flex directionM="column">
@@ -153,7 +153,7 @@ const Home = () => {
 
       {/* Company Ai Section */}
 
-      <ComAiSection>
+      <ComAiSection id="kyc">
         <CInner className="container">
           <div className="wrapper">
             <Flex directionM="column-reverse" wrap justify="space-between">
@@ -212,7 +212,7 @@ const Home = () => {
 
       {/* Pricing Section */}
 
-      <PricingSection>
+      <PricingSection id="pricing">
         <div className="container m-auto">
           <PInner>
             <Flex wrap justify="center" gap={40}>
