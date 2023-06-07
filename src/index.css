@@ -8,13 +8,42 @@
   box-sizing: border-box;
 }
 
-body{
-  font-family: 'Space Mono', monospace;
+.container {
+  margin: auto;
+  padding: 0px 20px
 }
 
 @media screen and (min-width: 400px) {
   .custom-height {
-    height:1062px ;
+    height: 1062px;
   }
 
+}
+
+.footer-wrapper {
+  background: url(/images/base.png);
+  background-position: bottom;
+  position: relative
+}
+
+.footer-wrapper .copy {
+  padding: 10px;
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.auth-card {
+  background: url(/base.png);
+  min-height: 553px;
+  background-repeat: no-repeat;
+}
+
+
+@media (max-width:640px) {
+  .auth-card {
+    background-size: 100% 100%;
+    min-height: auto;
+  }
 }

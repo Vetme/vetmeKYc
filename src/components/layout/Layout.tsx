@@ -12,11 +12,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     <>
       <div className="container mx-auto">
         <Navbar />
-        <div className="flex gap-5">
+        <div className="flex gap-5 mb-8">
           <Sidebar />
           {children}
         </div>
-        {/* <Footer /> */}
+        <Footer />
       </div>
     </>
   );

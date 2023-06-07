@@ -8,6 +8,8 @@ interface Props {
   linkTo?: string;
   parentClassNames?: string;
   children: ReactNode;
+  lDir?: string;
+  onClick?: () => void;
 }
 
 const LayeredBtn = ({
@@ -17,11 +19,14 @@ const LayeredBtn = ({
   linkTo = "#",
   children,
   parentClassNames,
+  lDir,
+  onClick,
 }: Props) => {
   return (
-    <Link
-      to={linkTo}
-      className={`relative block cursor-pointer ${parentClassNames}`}
+    <button
+      // to={linkTo}
+      onClick={onClick}
+      className={`relative block cursor-pointer w-full ${parentClassNames}`}
     >
       <div
         className={`bg-white flex items-center justify-center uppercase 
@@ -33,7 +38,9 @@ const LayeredBtn = ({
       ></div>
       <div
         className={`flex items-center gap-3 justify-center uppercase
-           border border-[#2E203E] rounded-[14px] absolute left-[4px] -top-[4px] hover:top-[4px] hover:left-2px`}
+           border border-[#2E203E] rounded-[14px] absolute -top-[4px]  ${
+             lDir == "right" ? "right-[4px]" : "left-[4px]"
+           }`}
         style={{
           backgroundColor: `${bgColor}`,
           width: `${width}`,
@@ -42,7 +49,7 @@ const LayeredBtn = ({
       >
         {children}
       </div>
-    </Link>
+    </button>
   );
 };
 

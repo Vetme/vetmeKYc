@@ -5,6 +5,10 @@ interface Props {
   shapeCustomClassNames?: string;
   inputCustomClassNames?: string;
   labelCustomClassNames?: string;
+  onChange: (e: any) => void;
+  value?: any;
+  type?: string;
+  name: string;
 }
 
 const TextInput = ({
@@ -14,9 +18,13 @@ const TextInput = ({
   inputCustomClassNames,
   labelCustomClassNames,
   isRequired = true,
+  value,
+  type = "text",
+  name,
+  onChange,
 }: Props) => {
   return (
-    <div className="relative mb-6 lg:mb-4">
+    <div className="relative mb-4 lg:mb-4">
       {label && (
         <label
           htmlFor={label}
@@ -38,18 +46,21 @@ const TextInput = ({
         className={
           shapeCustomClassNames
             ? shapeCustomClassNames
-            : "block mx-auto w-[70%] lg:w-[90%]"
+            : "block mx-auto w-[100%] lg:w-[100%]"
         }
       />
 
       <input
-        type="text"
+        type={type}
         className={
           `h-[30px] lg:h-[40px]  absolute top-[65%] lg:left-[45%] left-[48%] transform -translate-x-1/2 -translate-y-1/2 outline-0
         placeholder:uppercase placeholder:text-[#170728]` +
           (inputCustomClassNames ? inputCustomClassNames : " ")
         }
         placeholder={placeholder}
+        onChange={onChange}
+        value={value}
+        name={name}
       />
     </div>
   );
