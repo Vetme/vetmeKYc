@@ -62,16 +62,18 @@ const Action = styled.div`
   justify-content: center;
 `;
 
-const ReadyKyc = () => {
+const ReadyKyc = ({ onClick }: { onClick: () => void }) => {
   return (
     <Wrapper>
       <h2>Are you ready to start your KYC?</h2>
       <Text className="mt-3 mb-6">Get in touch or create an account.</Text>
 
       <Action>
-        <Button className="primary">Login in</Button>
+        <Button onClick={onClick} className="primary">
+          Login in
+        </Button>
         <Spacer width={30} />
-        <Button>Contact </Button>
+        <Button onClick={onClick}>Contact </Button>
       </Action>
     </Wrapper>
   );

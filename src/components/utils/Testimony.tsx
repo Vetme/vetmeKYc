@@ -47,12 +47,24 @@ const Wrapper = styled.div`
 
 const Inner = styled.div``;
 const Avatar = styled.div`
+  flex-shrink: 0;
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  img {
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+  }
   @media (max-width: 640px) {
     height: 60px;
     width: 60px;
 
     img {
       height: 100%;
+      width: 100%;
+      border-radius: 50%;
     }
   }
 `;
@@ -89,15 +101,16 @@ const Testimony = () => {
       <Inner>
         <Flex align="center">
           <Avatar className="mr-4 sm:mr-8">
-            <img src="/images/user.png" alt="User" />
+            <img src="/images/user.jpeg" alt="User" />
           </Avatar>
-          <Text>Comply Advantage</Text>
+          <Text>Compliance advantage with AML check</Text>
         </Flex>
         <Spacer height={40} heightM={20} />
         <Text>
-          “With issues pertaining to corruption, terrorist financing, and money
-          laundering becoming so prevalent, KYC policies have now evolved into
-          an important tool to combat illegal transactions.”
+          "Our platform offers unparalleled accuracy, enhanced security, and
+          scalability to meet the evolving needs of your business. With AML
+          check, we prioritize data privacy and ensure that your sensitive
+          information remains confidential at all times." VetMe Founder.
         </Text>
       </Inner>
 

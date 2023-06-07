@@ -94,7 +94,7 @@ const Footer = () => {
             </ul>
           </Section>
         </TopFooter>
-        <BottomFooter>
+        <BottomFooter id="support">
           <Flex justify="space-between">
             <Text>Copyright 2022. VetMe</Text>
             <Flex className="social-footer">

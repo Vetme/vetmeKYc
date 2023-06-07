@@ -14,6 +14,8 @@ import Settings from "../pages/Dashboard/Settings";
 import SearchResult from "../pages/Dashboard/SearchResult";
 import { SidebarContextProvider } from "../contexts/SidebarContext";
 import Notifications from "../pages/Dashboard/Notifications";
+import AdminRoute from "../components/guards/Admin";
+import MemberRoute from "../components/guards/Member";
 
 function AllRoutes() {
   return (
@@ -26,8 +28,22 @@ function AllRoutes() {
           <Route path="/login" element={<Login />} />
           <Route path="/verify" element={<Verify />} />
           <Route path="/questions" element={<Question />} />
-          <Route path="/process" element={<Process />} />
-          <Route path="/dashboard" element={<Index />} />
+          <Route
+            path="/process"
+            element={
+              <MemberRoute>
+                <Process />
+              </MemberRoute>
+            }
+          />
+          <Route
+            path="/dashboard"
+            element={
+              <AdminRoute>
+                <Index />
+              </AdminRoute>
+            }
+          />
           <Route path="/dashboard/companies" element={<Companies />} />
           <Route
             path="/dashboard/companies/search"

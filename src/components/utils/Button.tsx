@@ -35,7 +35,7 @@ interface BtnI {
   classNames?: string;
 }
 
-const Button: FC<BtnI> = ({ to, text, classNames }) => {
+const Button: FC<BtnI> = ({ to, text, classNames, onClick }) => {
   return (
     <>
       {to ? (
@@ -44,7 +44,9 @@ const Button: FC<BtnI> = ({ to, text, classNames }) => {
           {text}
         </Contain>
       ) : (
-        <Contain className={classNames}>{text}</Contain>
+        <Contain onClick={onClick} className={classNames}>
+          {text}
+        </Contain>
       )}
     </>
   );

@@ -34,9 +34,9 @@ const PriceWrapper = styled.div`
 `;
 const Inner = styled.div``;
 const Price = styled.div`
-  font-size: 136.81px;
+  font-size: 100.81px;
   color: #170728;
-  line-height: 175px;
+  line-height: 165px;
   text-transform: uppercase;
 
   @media (max-width: 640px) {
@@ -57,7 +57,7 @@ const Type = styled.div`
 const Options = styled.div``;
 
 const Desc = styled.div`
-  margin: 40px 0px;
+  margin: 0px 0px;
 `;
 
 const PricingCard: FC<PriceI> = ({ price }) => {
@@ -69,7 +69,7 @@ const PricingCard: FC<PriceI> = ({ price }) => {
         </Flex>
         <PriceWrapper>
           <Price>${price.price}</Price>
-          <Text className="duration">/{price.duration}</Text>
+          {/* <Text className="duration">/{price.duration}</Text> */}
         </PriceWrapper>
 
         <Desc>

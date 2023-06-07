@@ -63,7 +63,7 @@ export const ServiceSection = styled.div`
 `;
 export const TestimonySection = styled.div`
   background: #fff;
-  padding: 0px 0px;
+  padding: 20px 0px;
   position: relative;
 
   @media (max-width: 640px) {

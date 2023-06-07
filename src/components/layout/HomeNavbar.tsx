@@ -13,6 +13,7 @@ import {
 import { Flex } from "..";
 import Button from "../utils/Button";
 import { useLocation, useNavigate } from "react-router-dom";
+import PopUp from "../utils/modal/Popup";
 
 enum NavMenu {
   SOLUTIONS = "Solutions",
@@ -34,6 +35,9 @@ const container = {
   exit: {
     scale: 0,
     opacity: 0,
+    transition: {
+      delay: 0.3,
+    },
   },
 };
 
@@ -47,6 +51,7 @@ const item = {
 
 const Navbar = () => {
   const [open, setOpen] = useState<boolean>(false);
+  const [openInfo, setOpenInfo] = useState<boolean>(false);
   const [active, setActive] = useState<NavMenu>(NavMenu.SOLUTIONS);
   const location = useLocation();
 
@@ -91,6 +96,10 @@ const Navbar = () => {
               <LogoSVG />
             </div>
             <NavMiddle className="pricing">
+              <Item as="a" href="https://vetmeblock.com" value="Solutions">
+                <span></span>
+                Main
+              </Item>
               <Item
                 as="a"
                 href="#solutions"
@@ -102,6 +111,8 @@ const Navbar = () => {
                 Solutions
               </Item>
               <Item
+                as="a"
+                href="#developers"
                 className={active == NavMenu.DEVELOPER ? "active" : ""}
                 onClick={() => setActive(NavMenu.DEVELOPER)}
                 value="Developers"
@@ -127,13 +138,17 @@ const Navbar = () => {
               >
                 <span></span>Pricing
               </Item>
-              <Item value="Support">
+              <Item as="a" href="#support" value="Support">
                 <span></span>Support
               </Item>
             </NavMiddle>
             <NavRight>
-              <Button text="Sign up" to="/register" />
-              <Button classNames="dark" text="Login" />
+              <Button onClick={() => setOpenInfo(true)} text="Sign up" />
+              <Button
+                onClick={() => setOpenInfo(true)}
+                classNames="dark"
+                text="Login"
+              />
             </NavRight>
 
             <Bar
@@ -156,6 +171,10 @@ const Navbar = () => {
             animate="visible"
             exit="exit"
           >
+            <MItem as={motion.a} variants={item} href="https://vetmeblock.com">
+              <span></span>
+              Main
+            </MItem>
             <MItem
               as={motion.a}
               href="#solutions"
@@ -199,6 +218,8 @@ const Navbar = () => {
           </MobileMenu>
         )}
       </AnimatePresence>
+
+      <PopUp open={openInfo} close={() => setOpenInfo(false)} />
     </Nav>
   );
 };

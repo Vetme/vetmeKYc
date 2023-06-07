@@ -9,6 +9,7 @@ interface Props {
   parentClassNames?: string;
   children: ReactNode;
   lDir?: string;
+  onClick?: () => void;
 }
 
 const LayeredBtn = ({
@@ -19,11 +20,13 @@ const LayeredBtn = ({
   children,
   parentClassNames,
   lDir,
+  onClick,
 }: Props) => {
   return (
-    <Link
-      to={linkTo}
-      className={`relative block cursor-pointer ${parentClassNames}`}
+    <button
+      // to={linkTo}
+      onClick={onClick}
+      className={`relative block cursor-pointer w-full ${parentClassNames}`}
     >
       <div
         className={`bg-white flex items-center justify-center uppercase 
@@ -46,7 +49,7 @@ const LayeredBtn = ({
       >
         {children}
       </div>
-    </Link>
+    </button>
   );
 };
 

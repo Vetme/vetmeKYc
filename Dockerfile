@@ -1,6 +1,6 @@
-FROM node:17-appine
+FROM node:17-alpine
 
-WORKDIR /appine
+WORKDIR /app
 
 COPY package.json .
 
@@ -10,4 +10,4 @@ COPY . .
 
 EXPOSE 5173
 
-CMD ['npm', 'start']
+CMD ['npm','build']

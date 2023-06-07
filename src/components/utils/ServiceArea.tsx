@@ -133,7 +133,9 @@ const ServiceArea: FC<PriceI> = ({ service }) => {
         <Text className="text-2xl mt-7 mb-4" weight="700" as="h4">
           {service.title}
         </Text>
-        <Text as="p">{service.desc}</Text>
+        <Text as="p" className="text-sm">
+          {service.desc}
+        </Text>
       </Inner>
     </Wrapper>
   );
