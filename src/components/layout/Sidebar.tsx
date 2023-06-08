@@ -2,13 +2,13 @@ import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 
 const Sidebar = () => {
   return (
-    <div className="hidden lg:block  bg-[#EFF1EA] border border-[#453953] rounded-[10px] h-auto min-h-[500px] w-[322px]">
+    <div className="hidden lg:block  bg-[#EFF1EA] border border-[#453953] rounded-[10px] h-auto min-h-[500px] w-[322px] self-start top-[50px] sticky py-[30px]">
       <div className="relative flex flex-col h-full justify-center items-start px-3 gap-5">
         <img src="/shape1.png" alt="" />
         <img
           src="/user.png"
           alt=""
-          className="absolute top-[81px] left-[63px]"
+          className="absolute top-[52px] left-[63px]"
         />
         <p className="text-[0.9em]" style={{ color: "rgba(0, 0, 0, 0.7)" }}>
           “With issues pertaining to corruption, terrorist financing, and money

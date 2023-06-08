@@ -45,3 +45,87 @@ html{
 
 
 `;
+
+export const CTabs = styled.div`
+  border-top: 1px solid #170728;
+  padding: 0px 70px;
+  margin-top: 30px;
+  white-space: nowrap;
+  /* top: 100px;
+  position: sticky;
+  z-index: 999;
+  background: #fff; */
+
+  @media (max-width: 960px) {
+    display: none;
+  }
+`;
+
+export const CItem = styled.div<{ value: string }>`
+  font-size: 16px;
+  font-weight: 400;
+  padding: 0px 10px;
+  color: #170728;
+  transition: transform 0.5s ease;
+  font-family: "Space Grotesk", sans-serif;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+
+  &.active {
+    color: transparent;
+  }
+
+  &.active::after {
+    content: "${({ value }) => value}";
+    position: absolute;
+    height: 30px;
+    width: fit-content;
+    padding: 2px 10px;
+    color: #170728;
+    left: 0px;
+    bottom: -4px;
+    border: 1px solid #170728;
+    border-top: 1px solid #fff;
+    border-radius: 0px 0px 10px 10px;
+    white-space: nowrap;
+  }
+`;
+
+export const CBody = styled.div``;
+
+export const FormCon = styled.div`
+  background: url(/images/kyc.png);
+  background-size: 100% 100%;
+  margin: 30px 8px;
+  padding: 20px 0px;
+  position: relative;
+
+  &.geo {
+    background: url(/images/geo.png);
+    background-size: 100% 100%;
+
+    .header {
+      left: 70px;
+    }
+  }
+
+  &.cert {
+    background: url(/images/cert.png);
+    background-size: 100% 100%;
+  }
+
+  .header {
+    position: absolute;
+    top: 6px;
+    left: 100px;
+  }
+
+  .info {
+    position: absolute;
+    left: 310px;
+    top: 6px;
+    font-size: 10px;
+    color: rgba(0, 0, 0, 0.3);
+  }
+`;
