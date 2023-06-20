@@ -113,6 +113,11 @@ export const FormCon = styled.div`
   &.cert {
     background: url(/images/cert.png);
     background-size: 100% 100%;
+    .header {
+      position: absolute;
+      top: 6px;
+      left: 73px;
+    }
   }
 
   .header {
@@ -127,5 +132,39 @@ export const FormCon = styled.div`
     top: 6px;
     font-size: 10px;
     color: rgba(0, 0, 0, 0.3);
+  }
+
+  @media (max-width: 640px) {
+    background: #fff;
+    margin: 15px 4px;
+    padding: 10px 0px;
+  }
+`;
+
+export const SocialCon = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(217, 217, 217, 0.3);
+  border: 1px solid #453953;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 10px 0px;
+  width: 100%;
+`;
+
+export const Loader = styled.div`
+  position: relative;
+  /* display: grid; */
+  /* place-content: center; */
+
+  &:after {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 999;
   }
 `;

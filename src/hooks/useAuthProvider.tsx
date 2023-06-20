@@ -78,10 +78,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     return "";
   });
 
-  const [loggedIn] = useState(!!localStorage.getItem("token"));
+  const [loggedIn, setLoggedIn] = useState(!!localStorage.getItem("token"));
 
   const saveAccessToken = (token: string) => {
     setToken(token);
+    setLoggedIn(true);
     if (typeof window !== "undefined")
       localStorage.setItem("token", JSON.stringify(token));
   };
@@ -104,6 +105,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const clear = () => {
     setToken("");
+    setLoggedIn(false);
     setUser(null);
     if (typeof window !== "undefined") localStorage.clear();
   };

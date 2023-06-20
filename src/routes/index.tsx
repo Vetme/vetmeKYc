@@ -16,6 +16,7 @@ import { SidebarContextProvider } from "../contexts/SidebarContext";
 import Notifications from "../pages/Dashboard/Notifications";
 import AdminRoute from "../components/guards/Admin";
 import MemberRoute from "../components/guards/Member";
+import Pricing from "../pages/Pricing";
 
 function AllRoutes() {
   return (
@@ -28,6 +29,8 @@ function AllRoutes() {
           <Route path="/login" element={<Login />} />
           <Route path="/verify" element={<Verify />} />
           <Route path="/questions" element={<Question />} />
+          <Route path="/pricing" element={<Pricing />} />
+
           <Route
             path="/process"
             element={

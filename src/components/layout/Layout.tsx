@@ -10,13 +10,17 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <>
-      <div className="container mx-auto">
-        <Navbar />
-        <div className="flex mb-8">
-          <Sidebar />
-          {children}
+      <div className="container mx-auto h-full overflow-hidden">
+        <div className="h-full flex flex-col">
+          <div className="flex-1">
+            <Navbar />
+            <div className="flex mb-8 ">
+              <Sidebar />
+              {children}
+            </div>
+          </div>
+          <Footer />
         </div>
-        <Footer />
       </div>
     </>
   );

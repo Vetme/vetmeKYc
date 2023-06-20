@@ -4,4 +4,5 @@ export interface UserI {
   id?: string;
   name: string;
   role: string;
+  kyc_enabled: boolean;
 }

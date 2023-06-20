@@ -16,14 +16,14 @@ const Sidebar = () => {
           an important tool to combat illegal transactions.”
         </p>
         <p className="font-bold text-[#453953]">Comply Advantage</p>
-        <div className="flex gap-1">
+        {/* <div className="flex gap-1">
           <div className="border border-[#170728] flex justify-center items-center h-8 w-8 rounded-full">
             <BsArrowLeft />
           </div>
           <div className="border border-[#170728] flex justify-center items-center h-8 w-8 rounded-full">
             <BsArrowRight />
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

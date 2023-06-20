@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { LogoSVG } from "../icons";
+import { LogoSVG, LogoutIcon, User } from "../icons";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Item,
@@ -14,6 +14,7 @@ import { Flex } from "..";
 import Button from "../utils/Button";
 import { useLocation, useNavigate } from "react-router-dom";
 import PopUp from "../utils/modal/Popup";
+import { useAuth } from "../../hooks/useAuthProvider";
 
 enum NavMenu {
   SOLUTIONS = "Solutions",
@@ -54,6 +55,14 @@ const Navbar = () => {
   const [openInfo, setOpenInfo] = useState<boolean>(false);
   const [active, setActive] = useState<NavMenu>(NavMenu.SOLUTIONS);
   const location = useLocation();
+
+  const { loggedIn, clear } = useAuth();
+  const navigate = useNavigate();
+
+  const logout = () => {
+    clear();
+    navigate("/login");
+  };
 
   let prevScroll = 0;
   let header: any;
@@ -143,12 +152,35 @@ const Navbar = () => {
               </Item>
             </NavMiddle>
             <NavRight>
-              <Button onClick={() => setOpenInfo(true)} text="Sign up" />
-              <Button
-                onClick={() => setOpenInfo(true)}
-                classNames="dark"
-                text="Login"
-              />
+              {loggedIn ? (
+                <Flex align="center" gap={20}>
+                  <div
+                    onClick={logout}
+                    title="Logout"
+                    className="cursor-pointer bg-[#eff1ea] h-[40px] w-[40px] rounded-full flex items-center justify-center "
+                  >
+                    <LogoutIcon />
+                  </div>
+
+                  <div
+                    onClick={() => navigate("/process")}
+                    title="Dashboard"
+                    className="cursor-pointer bg-[#befecd] h-[40px] w-[40px] rounded-full flex items-center justify-center "
+                  >
+                    <User />
+                  </div>
+                </Flex>
+              ) : (
+                <>
+                  {" "}
+                  <Button onClick={() => setOpenInfo(true)} text="Sign up" />
+                  <Button
+                    onClick={() => setOpenInfo(true)}
+                    classNames="dark"
+                    text="Login"
+                  />
+                </>
+              )}
             </NavRight>
 
             <Bar

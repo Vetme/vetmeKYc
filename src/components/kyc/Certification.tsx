@@ -5,10 +5,10 @@ import { FormCon } from "../../styles";
 const Certification = () => {
   return (
     <div>
-      <FormCon className="cart">
+      <FormCon className="cert">
         <div className="px-[50px] py-[50px]">
           <div className="header">
-            <h4>Geo-Location</h4>
+            <h4>Certificate</h4>
           </div>
 
           <h3 className="font-semibold text-[1.1em] mb-4">

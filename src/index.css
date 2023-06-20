@@ -44,6 +44,6 @@
 @media (max-width:640px) {
   .auth-card {
     background-size: 100% 100%;
-    min-height: auto;
+    min-height: 460px;
   }
 }

@@ -21,6 +21,7 @@ const Wrapper = styled.div<{ bg?: string }>`
   padding: 46px 46px;
   border: 0.913319px solid #170728;
   border-radius: 29.2262px;
+  cursor: pointer;
 `;
 
 const PriceWrapper = styled.div`

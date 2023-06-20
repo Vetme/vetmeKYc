@@ -47,6 +47,12 @@ export const PricingSection = styled.div`
   /* position: sticky; */
   top: 0px;
 
+  &.page {
+    background: #fff;
+    padding: 150px 0px;
+    border: 1px solid transparent;
+  }
+
   @media (max-width: 640px) {
     /* display: none; */
     padding: 50px 0px;

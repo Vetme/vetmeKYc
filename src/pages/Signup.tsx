@@ -9,6 +9,8 @@ import { useFormik } from "formik";
 import { register } from "../service/auth.service";
 import { renderError, renderSuccess } from "../service/alert.service";
 import { useAuth } from "../hooks/useAuthProvider";
+import { Input, InputBox, InputInner, Spacer } from "../components";
+import * as Yup from "yup";
 
 const SignUp = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -41,47 +43,70 @@ const SignUp = () => {
 
       setLoading(false);
     },
+    validationSchema: Yup.object().shape({
+      name: Yup.string().required("Required"),
+      email: Yup.string().email("Invalid email").required("Required"),
+      password: Yup.string().required("Required"),
+    }),
   });
 
   return (
     <Layout>
       <div className="flex flex-col items-center w-full pt-[25px] lg:pt-0 gap-4">
-        <div className="relative auth-card w-full sm:w-[436px] pt-[44px] flex justify-center items-center p-[26px] mt-4">
+        <div className="relative auth-card w-full sm:w-[436px] pt-[44px] sm:p-[26px] mt-4 p-2">
           {/* <img src="/base.png" alt="" className="" /> */}
           <span className="uppercase text-sm absolute left-[50%] top-0 translate-x-[-50%]">
             Sign up
           </span>
           <div className="inner">
-            <div className="flex items-center flex-col  top-[56px] left-[64px] lg:left-[29px]">
+            <div className="p-2 top-[56px]  lg:left-[29px]">
               <form onSubmit={formik.handleSubmit}>
-                <TextInput3
-                  label="Name"
-                  inputCustomClassNames="w-[40%] lg:w-[78%] left-[39%] lg:left-[49%]"
-                  shapeCustomClassNames="w-[100%] lg:w-[100%] h-[64px] sm:h-auto"
-                  labelCustomClassNames="left-[29px] lg:left-[33px]"
-                  onChange={formik.handleChange}
-                  value={formik.values.name}
-                  name="name"
-                />
-                <TextInput3
-                  label="Email"
-                  inputCustomClassNames="w-[40%] lg:w-[78%] left-[39%] lg:left-[49%]"
-                  shapeCustomClassNames="w-[100%] lg:w-[100%] h-[64px] sm:h-auto"
-                  labelCustomClassNames="left-[29px] lg:left-[33px]"
-                  onChange={formik.handleChange}
-                  value={formik.values.email}
-                  name="email"
-                />
-                <TextInput3
-                  label="Password"
-                  type="password"
-                  inputCustomClassNames="w-[40%] lg:w-[78%] left-[39%] lg:left-[49%]"
-                  shapeCustomClassNames="w-[100%] lg:w-[100%] h-[64px] sm:h-auto"
-                  labelCustomClassNames="left-[29px] lg:left-[33px]"
-                  onChange={formik.handleChange}
-                  value={formik.values.password}
-                  name="password"
-                />
+                <InputBox className="standard">
+                  <label htmlFor="name">Name</label>
+                  <InputInner>
+                    <Input
+                      onChange={formik.handleChange}
+                      name="text"
+                      value={formik.values.name}
+                      type="name"
+                      placeholder=""
+                      id="name"
+                    />
+                  </InputInner>
+                </InputBox>
+
+                <Spacer height={20} />
+
+                <InputBox className="standard">
+                  <label htmlFor="email">Email Address</label>
+                  <InputInner>
+                    <Input
+                      onChange={formik.handleChange}
+                      name="email"
+                      value={formik.values.email}
+                      type="email"
+                      placeholder=""
+                      id="email"
+                    />
+                  </InputInner>
+                </InputBox>
+
+                <Spacer height={20} />
+
+                <InputBox className="standard">
+                  <label htmlFor="password">Password</label>
+                  <InputInner>
+                    <Input
+                      onChange={formik.handleChange}
+                      name="password"
+                      value={formik.values.password}
+                      type="password"
+                      placeholder=""
+                      id="password"
+                    />
+                  </InputInner>
+                </InputBox>
+
                 {/* <span className="self-start ml-6s text-[#8C8C8C] text-xs text-center -mt-4 lg:-mt-2  block mb-4 w-[60%]  lg:w-auto">
                 Password must be at least 6 characters
               </span> */}
@@ -92,6 +117,7 @@ const SignUp = () => {
                       bgColor="#BEFECD"
                       width="95%"
                       height="63px"
+                      block
                       parentClassNames="left-[3px] mb-4"
                       linkTo="" // pass the path here
                     >
@@ -105,6 +131,7 @@ const SignUp = () => {
                     <LayeredBtn
                       bgColor="#BEFECD"
                       width="95%"
+                      block
                       height="63px"
                       parentClassNames="-left-[1px] mb-4"
                       linkTo="" // pass the path here
@@ -119,6 +146,7 @@ const SignUp = () => {
                     <LayeredBtn
                       bgColor="#FFFFFF"
                       width="95%"
+                      block
                       height="63px"
                       parentClassNames="left-[3px]"
                       linkTo="" // pass the path here
@@ -131,6 +159,7 @@ const SignUp = () => {
                     <LayeredBtn
                       bgColor="#FFFFFF"
                       width="95%"
+                      block
                       height="63px"
                       parentClassNames="-left-[1px]"
                       linkTo="" // pass the path here

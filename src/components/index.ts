@@ -154,3 +154,114 @@ export const Spacer = styled.div<{
     width: ${({ widthM }) => widthM && widthM + "px"};
   }
 `;
+
+export const InputCon = styled.div`
+  label {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    color: #453953;
+    text-transform: uppercase;
+  }
+`;
+export const InputBox = styled.div<{ required?: boolean }>`
+  display: flex;
+  background-image: url(/input-shape.png);
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: 100% 100%;
+  height: 75px;
+  align-items: center;
+  position: relative;
+
+  span.error {
+    position: absolute;
+    bottom: -20px;
+    left: 25px;
+    font-size: 12px;
+    color: #f44336;
+  }
+
+  label {
+    position: absolute;
+    top: 0px;
+    text-transform: uppercase;
+    left: 38px;
+
+    ${({ required }) =>
+      required &&
+      `
+      &:after {
+      content: "*";
+      position: absolute;
+      top: 0px;
+      font-size: 12px;
+      right: -10px;
+      color: #f44336;
+    }
+    `}
+
+    @media (max-width: 640px) {
+      left: 28px;
+      font-size: 12px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    /* height: 73px; */
+    span.error {
+      left: 20px;
+    }
+  }
+
+  &.standard {
+    width: 383px;
+    @media (max-width: 640px) {
+      width: 100%;
+    }
+
+    div {
+      width: 100% !important;
+    }
+  }
+`;
+export const Input = styled.input`
+  height: 50px;
+  position: relative;
+  border: none;
+  outline: none;
+  flex: 1;
+  font-weight: 700;
+  font-weight: 400;
+  font-size: 18px;
+  /* width: 30%; */
+  color: #170728;
+  margin-left: 38px;
+
+  &.disabled {
+    pointer-events: none;
+  }
+
+  @media (max-width: 640px) {
+    /* font-size: 30px; */
+    font-size: 16px;
+    margin-left: 28px;
+  }
+`;
+
+export const InputInner = styled.div`
+  display: flex;
+  top: 11.5px;
+  align-items: center;
+  position: relative;
+  padding-right: 10px;
+
+  justify-content: space-between;
+  width: 100%;
+
+  select {
+    left: 32px;
+    position: absolute;
+    width: calc(100% - 40px);
+  }
+`;

@@ -4,7 +4,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import { TbCloudDownload } from "react-icons/tb";
 import FadeLoader from "react-spinners/FadeLoader";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import { MdOutlineArrowRight } from "react-icons/md";
 
@@ -27,6 +27,7 @@ import {
   Personal,
   Reviews,
 } from "../components/kyc";
+import { useAuth } from "../hooks/useAuthProvider";
 
 enum CustomTabs {
   PERSONAL_INFORMATION = "Personal Information",
@@ -39,6 +40,7 @@ enum CustomTabs {
 
 const Process = () => {
   const [popup, setPopup] = useState<boolean>(false);
+  const { user } = useAuth();
   const [active, setActive] = useState<CustomTabs>(
     CustomTabs.PERSONAL_INFORMATION
   );
@@ -46,6 +48,7 @@ const Process = () => {
     generating: false,
     generated: false,
   });
+  let navigate = useNavigate();
 
   const handleShowPopup = () => {
     setPopup(!popup);
@@ -75,6 +78,9 @@ const Process = () => {
     }, 6000);
   };
 
+  const handleNext = (val: any) => {
+    setActive(val);
+  };
   return (
     <Layout>
       {popup && (
@@ -159,31 +165,63 @@ const Process = () => {
           </div>
         </div>
       )}
-      <div className=" w-full gap-4">
-        <CTabs className="pricing">
-          {Object.values(CustomTabs).map((val, i) => (
-            <CItem
-              href="#solutions"
-              className={active == val ? "active" : ""}
-              value={val}
-              onClick={() => setActive(val)}
-              as="a"
-            >
-              <span></span>
-              {val}
-            </CItem>
-          ))}
-        </CTabs>
+      {user.kyc_enabled ? (
+        <div className=" w-full gap-4">
+          <CTabs className="pricing">
+            {Object.values(CustomTabs).map((val, i) => (
+              <CItem
+                href="#solutions"
+                className={active == val ? "active" : ""}
+                value={val}
+                onClick={() => setActive(val)}
+                as="a"
+              >
+                <span></span>
+                {val}
+              </CItem>
+            ))}
+          </CTabs>
 
-        <CBody>
-          {CustomTabs.PERSONAL_INFORMATION == active && <Personal />}
-          {CustomTabs.BIOMETRIC == active && <Biometrics />}
-          {CustomTabs.IDENTIFICATION == active && <Identification />}
-          {CustomTabs.GEOLOCATION == active && <GeoLocation />}
-          {CustomTabs.REVIEW_TERMS_CONDITION == active && <Reviews />}
-          {CustomTabs.CERTIFICATION == active && <Certification />}
-        </CBody>
-      </div>
+          <CBody>
+            {CustomTabs.PERSONAL_INFORMATION == active && (
+              <Personal next={() => handleNext(CustomTabs.IDENTIFICATION)} />
+            )}
+            {CustomTabs.IDENTIFICATION == active && (
+              <Identification next={() => handleNext(CustomTabs.BIOMETRIC)} />
+            )}
+            {CustomTabs.BIOMETRIC == active && <Biometrics />}
+            {CustomTabs.GEOLOCATION == active && (
+              <GeoLocation
+                next={() => handleNext(CustomTabs.REVIEW_TERMS_CONDITION)}
+              />
+            )}
+            {CustomTabs.REVIEW_TERMS_CONDITION == active && <Reviews />}
+            {CustomTabs.CERTIFICATION == active && <Certification />}
+          </CBody>
+        </div>
+      ) : (
+        <div className=" w-full gap-4">
+          <div className="p-5">
+            <div className="my-4">
+              {" "}
+              <h4 className="text-lg">Welcome {user.name}!</h4>
+            </div>
+
+            <LayeredBtn
+              lDir="right"
+              bgColor="#FBF2FF"
+              width="147px"
+              height="46px"
+              parentClassNames="w-auto"
+              onClick={() => navigate("/pricing")}
+            >
+              <span className="text-[#170728] text-[0.87em]">
+                Start Your Kyc
+              </span>
+            </LayeredBtn>
+          </div>
+        </div>
+      )}
     </Layout>
   );
 };

@@ -29,43 +29,13 @@ import Testimony from "../components/utils/Testimony";
 import ReadyKyc from "../components/utils/Ready";
 import LayeredBtn from "../components/utils/LayeredBtn";
 import PopUp from "../components/utils/modal/Popup";
+import { pricesData } from "./data";
 
 const Home = () => {
   const [openInfo, setOpenInfo] = useState<boolean>(false);
 
   const prices = useMemo(() => {
-    return [
-      {
-        title: "Regular",
-        price: 500,
-        duration: "",
-        desc: "Automate your KYC process and eliminate the need for manual verification, reducing operational costs and accelerating customer onboarding. ",
-        options: [
-          "Personal Information KYC",
-          "Identification KYC",
-          "Geo-location KYC",
-          "Personal Information KYC",
-          "Transferable Data.",
-        ],
-      },
-
-      {
-        title: "Premium",
-        price: 1000,
-        duration: "",
-        desc: "Automate your KYC process and eliminate the need for manual verification, reducing operational costs and accelerating customer onboarding. ",
-        options: [
-          "Personal Information KYC",
-          "Identification KYC",
-          "Geo-location KYC",
-          "Personal Information KYC",
-          "Transferable Data.",
-          "Up to 4 team members.",
-          "Suitable for businesses",
-        ],
-        color: "#BEFECD",
-      },
-    ];
+    return pricesData;
   }, []);
 
   const services = useMemo(() => {

@@ -1,146 +1,347 @@
-import React from "react";
+import React, { useState } from "react";
 import TextInput from "../utils/TextInput";
 import LayeredBtn from "../utils/LayeredBtn";
 import { BsPlus } from "react-icons/bs";
 import styled from "styled-components";
-import { FormCon } from "../../styles";
+import { FormCon, SocialCon } from "../../styles";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { renderError, renderSuccess } from "../../service/alert.service";
+import { Flex, Input, InputBox, InputInner } from "..";
+import { LinkI, TrashI } from "../icons";
+import { countries } from "../../pages/data";
+import { processBasic } from "../../service/kyc.service";
+import FormLoader from "../FormLoading";
 
-const Personal = () => {
+const Personal = ({ next }: { next: () => void }) => {
+  const [loading, setLoading] = useState<boolean>(false);
+  const [social, setSocial] = useState<string>("");
+  const [socials, setSocials] = useState<string[]>([]);
+  const [errors, setErrors] = useState<string[]>([]);
+
+  const formik = useFormik({
+    initialValues: {
+      first_name: "",
+      last_name: "",
+      middle_name: "",
+      email: "",
+      disability: "",
+      phone: "",
+      state: "",
+      nationality: "",
+      dob: "",
+      religion: "",
+      marital_status: "",
+    },
+    onSubmit: async (data) => {
+      setLoading(true);
+      try {
+        const sData: any = { ...data };
+        sData.socials = JSON.stringify(socials);
+        sData.disability = sData.disability == "Yes" ? true : false;
+        const res: any = await processBasic(sData);
+        next();
+        renderSuccess("Personal Information Saved!");
+      } catch (error: any) {
+        renderError(error.response || "Opps, Something went wrong");
+      } finally {
+        setLoading(false);
+      }
+
+      setLoading(false);
+    },
+    validationSchema: Yup.object().shape({
+      first_name: Yup.string().required("FIrst name is required"),
+      last_name: Yup.string().required("Last name si required"),
+      email: Yup.string().email("Invalid email").required("Email is Required"),
+      disability: Yup.string().required("Required"),
+      phone: Yup.string().required("Phone Number is required"),
+      state: Yup.string().required("State is required"),
+      nationality: Yup.string().required("Nationality is required"),
+      dob: Yup.string().required("Date of Birth is required"),
+    }),
+  });
+
+  const addNew = () => {
+    if (!social.length) return;
+    let s = [...socials];
+
+    s.push(social);
+    setSocials(s);
+    setSocial("");
+  };
+
+  const removeS = (i: number) => {
+    setSocials((prev) => prev.filter((_, index) => index !== i));
+  };
+
   return (
     <FormCon>
-      <div className="px-[50px] py-[50px]">
-        <div className="header">
-          <h4>Personal Information</h4>
-        </div>
-        <div className="info">
-          <span>User information(field marked with *are mandatory) </span>
-        </div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 items-center lg:gap-6">
-          <TextInput
-            label="First Name"
-            inputCustomClassNames="w-[80%] left-[41%] lg:left-[44%]"
-            shapeCustomClassNames="w-11/12"
-            labelCustomClassNames="left-[29px] lg:left-[33px]"
-          />
-          <TextInput
-            label="Middle Name"
-            inputCustomClassNames="w-[80%] left-[41%] lg:left-[44%]"
-            shapeCustomClassNames="w-11/12"
-            labelCustomClassNames="left-[29px] lg:left-[33px]"
-          />
-        </div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 items-center lg:gap-6">
-          <TextInput
-            label="Last Name"
-            inputCustomClassNames="w-[80%] left-[41%] lg:left-[44%]"
-            shapeCustomClassNames="w-11/12"
-            labelCustomClassNames="left-[29px] lg:left-[33px]"
-          />
-          <TextInput
-            label="Marital status"
-            inputCustomClassNames="w-[80%] left-[41%] lg:left-[44%]"
-            shapeCustomClassNames="w-11/12"
-            labelCustomClassNames="left-[29px] lg:left-[33px]"
-          />
-        </div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 items-center lg:gap-6">
-          <TextInput
-            label="State of Origin"
-            inputCustomClassNames="w-[80%] left-[41%] lg:left-[44%]"
-            shapeCustomClassNames="w-11/12"
-            labelCustomClassNames="left-[29px] lg:left-[33px]"
-          />
-          <TextInput
-            label="Phone Number"
-            inputCustomClassNames="w-[80%] left-[41%] lg:left-[44%]"
-            shapeCustomClassNames="w-11/12"
-            labelCustomClassNames="left-[29px] lg:left-[33px]"
-          />
-        </div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 items-center lg:gap-6">
-          <TextInput
-            label="Disability"
-            inputCustomClassNames="w-[80%] left-[41%] lg:left-[44%]"
-            shapeCustomClassNames="w-11/12"
-            labelCustomClassNames="left-[29px] lg:left-[33px]"
-          />
-          <TextInput
-            label="Email Address"
-            inputCustomClassNames="w-[80%] left-[41%] lg:left-[44%]"
-            shapeCustomClassNames="w-11/12"
-            labelCustomClassNames="left-[29px] lg:left-[33px]"
-          />
-        </div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 items-center lg:gap-6">
-          <TextInput
-            label="Nationality"
-            inputCustomClassNames="w-[80%] left-[41%] lg:left-[44%]"
-            shapeCustomClassNames="w-11/12"
-            labelCustomClassNames="left-[29px] lg:left-[33px]"
-          />
-          <TextInput
-            label="Religion"
-            inputCustomClassNames="w-[80%] left-[41%] lg:left-[44%]"
-            shapeCustomClassNames="w-11/12"
-            labelCustomClassNames="left-[29px] lg:left-[33px]"
-          />
-        </div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 items-center lg:gap-6">
-          <TextInput
-            label="Social Media"
-            inputCustomClassNames="w-[80%] left-[41%] lg:left-[44%]"
-            shapeCustomClassNames="w-11/12"
-            labelCustomClassNames="left-[29px] lg:left-[33px]"
-          />
-          <TextInput
-            label="Date Of Birth"
-            inputCustomClassNames="w-[80%] left-[41%] lg:left-[44%]"
-            shapeCustomClassNames="w-11/12"
-            labelCustomClassNames="left-[29px] lg:left-[33px]"
-          />
-        </div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-6 mb-4 lg:ml-5 ml-4  w-[87%]">
-          <div
-            className="bg-[#D9D9D94D] border border-[#453953] rounded-lg h-[52px] grid gap-4 items-center
-                       py-1 px-3 uppercase"
-            style={{ gridTemplateColumns: "10% 60% 10%" }}
-          >
-            <img src="/shape.png" alt="" />
-            <span>Facebook.com</span>
-            <div className="bg-white border h-[40px] w-[40px]  flex items-center justify-center align-self-end rounded-full border-[#5D5169]">
-              <img src="/trash.png" alt="" />
-            </div>
+      {/* <FormLoader busy={false}> */}
+      <form onSubmit={formik.handleSubmit}>
+        <div className="px-[10px] sm:px-[50px] py-[50px]">
+          <div className="header">
+            <h4>Personal Information</h4>
           </div>
-        </div>
+          <div className="info">
+            <span>User information(field marked with *are mandatory) </span>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 items-center lg:gap-6 gap-4">
+            <InputBox className="standard" required>
+              <label htmlFor="first_name">First Name</label>
+              <InputInner>
+                <Input
+                  onChange={formik.handleChange}
+                  name="first_name"
+                  value={formik.values.first_name}
+                  type="text"
+                  placeholder=""
+                  id="first_name"
+                />
+              </InputInner>
+              {formik.touched && formik.errors.first_name && (
+                <span className="error">{formik.errors.first_name}</span>
+              )}
+            </InputBox>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-6 mb-4 lg:ml-5 ml-4  w-[87%]">
-          <div
-            className="bg-[#D9D9D94D] border border-[#453953] rounded-lg h-[52px] grid gap-4 items-center
-              py-1 px-3 uppercase"
-            style={{ gridTemplateColumns: "10% 60% 10%" }}
-          >
-            <img src="/shape.png" alt="" />
-            <span>Instagram.com</span>
-            <div className="bg-white border h-[40px] w-[40px]  flex items-center justify-center align-self-end  rounded-full border-[#5D5169]">
-              <img src="/trash.png" alt="" />
-            </div>
+            <InputBox className="standard">
+              <label htmlFor="middle_name">Middle Name</label>
+              <InputInner>
+                <Input
+                  onChange={formik.handleChange}
+                  name="middle_name"
+                  value={formik.values.middle_name}
+                  type="text"
+                  placeholder=""
+                  id="middle_name"
+                />
+              </InputInner>
+            </InputBox>
+
+            <InputBox className="standard" required>
+              <label htmlFor="last_name">Last Name</label>
+              <InputInner>
+                <Input
+                  onChange={formik.handleChange}
+                  name="last_name"
+                  value={formik.values.last_name}
+                  type="text"
+                  placeholder=""
+                  id="last_name"
+                />
+              </InputInner>
+              {formik.touched && formik.errors.last_name && (
+                <span className="error">{formik.errors.last_name}</span>
+              )}
+            </InputBox>
+
+            <InputBox className="standard" required>
+              <label htmlFor="last_name">Marital Status</label>
+              <InputInner>
+                <select
+                  onChange={formik.handleChange}
+                  name="marital_status"
+                  id=""
+                >
+                  <option value="Single">Select marital status</option>
+                  <option value="Single">Single</option>
+                  <option value="Married">Married</option>
+                </select>
+              </InputInner>
+              {formik.touched && formik.errors.marital_status && (
+                <span className="error">{formik.errors.marital_status}</span>
+              )}
+            </InputBox>
+
+            <InputBox className="standard" required>
+              <label htmlFor="state">State</label>
+              <InputInner>
+                <Input
+                  onChange={formik.handleChange}
+                  name="state"
+                  value={formik.values.state}
+                  type="text"
+                  placeholder=""
+                  id="state"
+                />
+              </InputInner>
+              {formik.touched && formik.errors.state && (
+                <span className="error">{formik.errors.state}</span>
+              )}
+            </InputBox>
+
+            <InputBox className="standard" required>
+              <label htmlFor="phone">Phone Number</label>
+              <InputInner>
+                <Input
+                  onChange={formik.handleChange}
+                  name="phone"
+                  value={formik.values.phone}
+                  type="text"
+                  placeholder=""
+                  id="phone"
+                />
+              </InputInner>
+              {formik.touched && formik.errors.phone && (
+                <span className="error">{formik.errors.phone}</span>
+              )}
+            </InputBox>
+
+            <InputBox className="standard" required>
+              <label htmlFor="last_name">Do you have disability</label>
+              <InputInner>
+                <select
+                  onChange={formik.handleChange}
+                  name="disability"
+                  id="disability"
+                  value={formik.values.phone}
+                >
+                  <option value="">Select</option>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+                </select>
+              </InputInner>
+
+              {formik.touched && formik.errors.disability && (
+                <span className="error">{formik.errors.disability}</span>
+              )}
+            </InputBox>
+
+            <InputBox className="standard" required>
+              <label htmlFor="email">Email Address</label>
+              <InputInner>
+                <Input
+                  onChange={formik.handleChange}
+                  name="email"
+                  value={formik.values.email}
+                  type="text"
+                  placeholder=""
+                  id="email"
+                />
+              </InputInner>
+              {formik.touched && formik.errors.email && (
+                <span className="error">{formik.errors.email}</span>
+              )}
+            </InputBox>
+
+            <InputBox className="standard" required>
+              <label htmlFor="nationality">Nationality</label>
+              <InputInner>
+                <select
+                  onChange={formik.handleChange}
+                  value={formik.values.nationality}
+                  name="nationality"
+                  id="nationality"
+                >
+                  <option>Select Nationality</option>
+                  {countries.map((country, i) => (
+                    <option value={country.name} key={country.code}>
+                      {country.name}
+                    </option>
+                  ))}
+                </select>
+              </InputInner>
+
+              {formik.touched && formik.errors.nationality && (
+                <span className="error">{formik.errors.nationality}</span>
+              )}
+            </InputBox>
+
+            <InputBox className="standard" required>
+              <label htmlFor="religion">Religion</label>
+              <InputInner>
+                <Input
+                  onChange={formik.handleChange}
+                  name="religion"
+                  value={formik.values.religion}
+                  type="text"
+                  placeholder="Religion"
+                  id="religion"
+                />
+              </InputInner>
+              {formik.touched && formik.errors.religion && (
+                <span className="error">{formik.errors.religion}</span>
+              )}
+            </InputBox>
+
+            <InputBox className="standard" required>
+              <label htmlFor="dob">Date Of Birth</label>
+              <InputInner>
+                <Input
+                  onChange={formik.handleChange}
+                  name="dob"
+                  value={formik.values.dob}
+                  type="date"
+                  placeholder=""
+                  id="dob"
+                />
+              </InputInner>
+              {formik.touched && formik.errors.dob && (
+                <span className="error">{formik.errors.dob}</span>
+              )}
+            </InputBox>
           </div>
-        </div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-6 lg:ml-5 ml-4">
+          <br />
+
+          <div className="" style={{ width: "300px" }}>
+            <InputBox className="standard" required>
+              <label htmlFor="social">Social Media</label>
+              <InputInner>
+                <Input
+                  onChange={(e) => setSocial(e.target.value)}
+                  name="social"
+                  value={social}
+                  type="text"
+                  placeholder=""
+                  id="social"
+                />
+              </InputInner>
+            </InputBox>
+
+            {socials.map((social, i) => (
+              <SocialCon key={i}>
+                <Flex align="center" gap={10}>
+                  <LinkI />
+                  {social}
+                </Flex>
+                <div onClick={() => removeS(i)}>
+                  <TrashI />
+                </div>
+              </SocialCon>
+            ))}
+
+            <br />
+
+            <LayeredBtn
+              bgColor="#BEFECD"
+              width="88%"
+              block
+              height="63px"
+              onClick={addNew}
+              type="button"
+              parentClassNames="mb-4 justify-between"
+              linkTo="" // pass the path here
+            >
+              <span className="text-[#170728]">Add New Field</span>
+              <div className=" bg-[#170728] border border-[#170728] flex justify-center items-center h-8 w-8 rounded-full">
+                <BsPlus color="#FFFFFF" />
+              </div>
+            </LayeredBtn>
+          </div>
+
           <LayeredBtn
             bgColor="#BEFECD"
             width="88%"
+            block
             height="63px"
+            type="submit"
             parentClassNames="mb-4 justify-between"
-            linkTo="" // pass the path here
           >
-            <span className="text-[#170728]">Add New Field</span>
-            <div className=" bg-[#170728] border border-[#170728] flex justify-center items-center h-8 w-8 rounded-full">
-              <BsPlus color="#FFFFFF" />
-            </div>
+            <span className="text-[#170728]">Save and Continue</span>
           </LayeredBtn>
         </div>
-      </div>
+      </form>
+      {/* </FormLoader> */}
     </FormCon>
   );
 };
