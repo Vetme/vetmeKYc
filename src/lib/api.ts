@@ -8,9 +8,9 @@ instance.interceptors.response.use((response: any) => response.data);
 instance.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
 
 // AUTHORIZATION
-const token = JSON.parse(localStorage.getItem("token") as any);
 
 instance.interceptors.request.use(function (config) {
+  const token = JSON.parse(localStorage.getItem("token") as any);
   config.headers.Authorization = `Bearer ${token}`;
   return config;
 });

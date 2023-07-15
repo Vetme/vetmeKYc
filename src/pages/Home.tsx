@@ -2,7 +2,7 @@ import React, { useMemo, useState } from "react";
 import HomeLayout from "../components/layout/HomeLayout";
 import Navbar from "../components/layout/Navbar";
 import Sidebar from "../components/layout/Sidebar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Hero,
   HDetails,
@@ -33,6 +33,7 @@ import { pricesData } from "./data";
 
 const Home = () => {
   const [openInfo, setOpenInfo] = useState<boolean>(false);
+  let navigate = useNavigate();
 
   const prices = useMemo(() => {
     return pricesData;
@@ -122,6 +123,7 @@ const Home = () => {
                     width="147px"
                     parentClassNames="w-auto"
                     height="46px"
+                    onClick={() => navigate("/login")}
                   >
                     <span
                       onClick={() => setOpenInfo(true)}

@@ -156,3 +156,11 @@ export const ReadySection = styled.div`
     /* display: none; */
   }
 `;
+
+export const CodeInput = styled.input`
+  border: 1px solid #000;
+  border-radius: 5px;
+  padding: 10px 15px;
+  width: 100%;
+  margin: 20px 0px;
+`;

@@ -144,6 +144,7 @@ const Verify = () => {
                 bgColor="#BEFECD"
                 width="90%"
                 height="63px"
+                block
                 parentClassNames="left-[30px] mb-4"
                 linkTo="" // pass the path here
                 onClick={handleSubmit}

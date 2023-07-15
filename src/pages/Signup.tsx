@@ -6,15 +6,16 @@ import LayeredBtn from "../components/utils/LayeredBtn";
 import TextInput from "../components/utils/TextInput";
 import TextInput3 from "../components/utils/TextInput3";
 import { useFormik } from "formik";
-import { register } from "../service/auth.service";
+import { googleVerify, register } from "../service/auth.service";
 import { renderError, renderSuccess } from "../service/alert.service";
 import { useAuth } from "../hooks/useAuthProvider";
 import { Input, InputBox, InputInner, Spacer } from "../components";
 import * as Yup from "yup";
+import { useGoogleLogin } from "@react-oauth/google";
 
 const SignUp = () => {
   const [loading, setLoading] = useState<boolean>(false);
-  const { saveVerificationToken } = useAuth();
+  const { saveAccessToken, saveVerificationToken, saveUser } = useAuth();
   let navigate = useNavigate();
 
   const formik = useFormik({
@@ -50,6 +51,17 @@ const SignUp = () => {
     }),
   });
 
+  const handleLogin = useGoogleLogin({
+    onSuccess: (tokenResponse) => {
+      googleVerify(tokenResponse.access_token).then((res: any) => {
+        saveAccessToken(res?.token);
+        saveUser(res?.user);
+        navigate(`/process`);
+        renderSuccess("Welcome Back!");
+      });
+    },
+  });
+
   return (
     <Layout>
       <div className="flex flex-col items-center w-full pt-[25px] lg:pt-0 gap-4">
@@ -66,9 +78,9 @@ const SignUp = () => {
                   <InputInner>
                     <Input
                       onChange={formik.handleChange}
-                      name="text"
+                      name="name"
                       value={formik.values.name}
-                      type="name"
+                      type="text"
                       placeholder=""
                       id="name"
                     />
@@ -149,7 +161,7 @@ const SignUp = () => {
                       block
                       height="63px"
                       parentClassNames="left-[3px]"
-                      linkTo="" // pass the path here
+                      onClick={() => handleLogin()}
                     >
                       <img src="/google.png" alt="" />
                       <span>Sign up with google</span>
@@ -162,7 +174,7 @@ const SignUp = () => {
                       block
                       height="63px"
                       parentClassNames="-left-[1px]"
-                      linkTo="" // pass the path here
+                      onClick={() => handleLogin()}
                     >
                       <img src="/google.png" alt="" className="w-4" />
                       <span>Sign up with google</span>

@@ -111,7 +111,7 @@ const Navbar = () => {
               </Item>
               <Item
                 as="a"
-                href="#solutions"
+                href="/#solutions"
                 className={active == NavMenu.SOLUTIONS ? "active" : ""}
                 value="Solutions"
                 onClick={() => setActive(NavMenu.SOLUTIONS)}
@@ -121,7 +121,7 @@ const Navbar = () => {
               </Item>
               <Item
                 as="a"
-                href="#developers"
+                href="/#developers"
                 className={active == NavMenu.DEVELOPER ? "active" : ""}
                 onClick={() => setActive(NavMenu.DEVELOPER)}
                 value="Developers"
@@ -173,12 +173,8 @@ const Navbar = () => {
               ) : (
                 <>
                   {" "}
-                  <Button onClick={() => setOpenInfo(true)} text="Sign up" />
-                  <Button
-                    onClick={() => setOpenInfo(true)}
-                    classNames="dark"
-                    text="Login"
-                  />
+                  <Button to="/signup" text="Sign up" />
+                  <Button to="/login" classNames="dark" text="Login" />
                 </>
               )}
             </NavRight>

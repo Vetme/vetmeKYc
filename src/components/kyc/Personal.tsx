@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TextInput from "../utils/TextInput";
 import LayeredBtn from "../utils/LayeredBtn";
-import { BsPlus } from "react-icons/bs";
 import styled from "styled-components";
 import { FormCon, SocialCon } from "../../styles";
 import { useFormik } from "formik";
@@ -10,14 +9,20 @@ import { renderError, renderSuccess } from "../../service/alert.service";
 import { Flex, Input, InputBox, InputInner } from "..";
 import { LinkI, TrashI } from "../icons";
 import { countries } from "../../pages/data";
-import { processBasic } from "../../service/kyc.service";
+import { processBasic, getBasic } from "../../service/kyc.service";
 import FormLoader from "../FormLoading";
-
+import { BsPlus } from "react-icons/bs";
+import { useAuth } from "../../hooks/useAuthProvider";
+import moment from "moment";
+import { useNavigate } from "react-router-dom";
 const Personal = ({ next }: { next: () => void }) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [social, setSocial] = useState<string>("");
   const [socials, setSocials] = useState<string[]>([]);
   const [errors, setErrors] = useState<string[]>([]);
+  const [basic, setBasic] = useState<any>(null);
+  const { user } = useAuth();
+  let navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
@@ -31,7 +36,7 @@ const Personal = ({ next }: { next: () => void }) => {
       nationality: "",
       dob: "",
       religion: "",
-      marital_status: "",
+      marital_status: "Single",
     },
     onSubmit: async (data) => {
       setLoading(true);
@@ -40,7 +45,7 @@ const Personal = ({ next }: { next: () => void }) => {
         sData.socials = JSON.stringify(socials);
         sData.disability = sData.disability == "Yes" ? true : false;
         const res: any = await processBasic(sData);
-        next();
+        navigate("/process/kyc");
         renderSuccess("Personal Information Saved!");
       } catch (error: any) {
         renderError(error.response || "Opps, Something went wrong");
@@ -75,9 +80,44 @@ const Personal = ({ next }: { next: () => void }) => {
     setSocials((prev) => prev.filter((_, index) => index !== i));
   };
 
+  useEffect(() => {
+    if (user) {
+      // formik.setFieldValue("email", user.email);
+    }
+
+    fetchBasic();
+  }, []);
+
+  const fetchBasic = async () => {
+    try {
+      const { basic }: any = await getBasic();
+
+      console.log(basic.dob);
+      formik.setFieldValue("email", basic.email);
+      formik.setFieldValue("first_name", basic.first_name);
+      formik.setFieldValue("last_name", basic.last_name);
+      formik.setFieldValue("middle_name", basic.middle_name);
+      formik.setFieldValue("state", basic.state);
+      formik.setFieldValue("nationality", basic.nationality);
+      formik.setFieldValue("phone", basic.phone);
+      formik.setFieldValue("dob", moment(basic.dob).format("YYYY-MM-DD"));
+      formik.setFieldValue("religion", basic.religion);
+      formik.setFieldValue("marital_status", basic.marital_status);
+      formik.setFieldValue("disability", basic.disability ? "Yes" : "No");
+
+      setSocials(basic.socials);
+      setBasic(basic);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <FormCon>
       {/* <FormLoader busy={false}> */}
+
+      {/* <button onClick={verifyTest}>Verify</button> */}
+
       <form onSubmit={formik.handleSubmit}>
         <div className="px-[10px] sm:px-[50px] py-[50px]">
           <div className="header">
@@ -136,14 +176,15 @@ const Personal = ({ next }: { next: () => void }) => {
             </InputBox>
 
             <InputBox className="standard" required>
-              <label htmlFor="last_name">Marital Status</label>
+              <label htmlFor="marital_status">Marital Status</label>
               <InputInner>
                 <select
                   onChange={formik.handleChange}
                   name="marital_status"
-                  id=""
+                  id="marital_status"
+                  value={formik.values.marital_status}
                 >
-                  <option value="Single">Select marital status</option>
+                  <option value="">Select marital status</option>
                   <option value="Single">Single</option>
                   <option value="Married">Married</option>
                 </select>
@@ -194,7 +235,7 @@ const Personal = ({ next }: { next: () => void }) => {
                   onChange={formik.handleChange}
                   name="disability"
                   id="disability"
-                  value={formik.values.phone}
+                  value={formik.values.disability}
                 >
                   <option value="">Select</option>
                   <option value="Yes">Yes</option>
@@ -329,19 +370,34 @@ const Personal = ({ next }: { next: () => void }) => {
             </LayeredBtn>
           </div>
 
-          <LayeredBtn
-            bgColor="#BEFECD"
-            width="88%"
-            block
-            height="63px"
-            type="submit"
-            parentClassNames="mb-4 justify-between"
-          >
-            <span className="text-[#170728]">Save and Continue</span>
-          </LayeredBtn>
+          {!basic?.isVerified && !user.is_verified && (
+            <LayeredBtn
+              bgColor="#BEFECD"
+              width="88%"
+              block
+              height="63px"
+              type="submit"
+              parentClassNames="mb-4 justify-between"
+            >
+              <span className="text-[#170728]">Save and Continue</span>
+            </LayeredBtn>
+          )}
+
+          {user.is_verified && (
+            <LayeredBtn
+              bgColor="#BEFECD"
+              width="88%"
+              block
+              height="63px"
+              type="button"
+              onClick={() => next()}
+              parentClassNames="mb-4 justify-between"
+            >
+              <span className="text-[#170728]">Download Certificate</span>
+            </LayeredBtn>
+          )}
         </div>
       </form>
-      {/* </FormLoader> */}
     </FormCon>
   );
 };

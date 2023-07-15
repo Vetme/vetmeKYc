@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import styled from "styled-components";
 import { Flex, Text } from "..";
 import { Check } from "../icons";
+import Button from "./Button";
 
 interface PriceI {
   price: {
@@ -85,6 +86,13 @@ const PricingCard: FC<PriceI> = ({ price }) => {
             </Flex>
           ))}
         </Options>
+
+        <Flex justify="center">
+          <Button
+            text="subscribe"
+            to={`/subscription?sub=${price.title.toLowerCase()}`}
+          />
+        </Flex>
       </Inner>
     </Wrapper>
   );

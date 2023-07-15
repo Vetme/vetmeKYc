@@ -112,7 +112,10 @@ export const FormCon = styled.div`
 
   &.cert {
     background: url(/images/cert.png);
-    background-size: 100% 100%;
+    background-size: 100% 823px;
+    border-bottom: 1px solid;
+    border-radius: 0px 10px 10px 10px;
+    /* background-size: 100% 100%; */
     .header {
       position: absolute;
       top: 6px;
@@ -167,4 +170,12 @@ export const Loader = styled.div`
     background: rgba(0, 0, 0, 0.3);
     z-index: 999;
   }
+`;
+export const KYCWrapper = styled.div`
+  height: 600px;
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;

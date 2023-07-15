@@ -8,9 +8,10 @@ import { useFormik } from "formik";
 import { useAuth } from "../hooks/useAuthProvider";
 import { useState } from "react";
 import { renderError, renderSuccess } from "../service/alert.service";
-import { login } from "../service/auth.service";
+import { login, googleVerify } from "../service/auth.service";
 import { Input, InputBox, InputInner, Spacer } from "../components";
 import * as Yup from "yup";
+import { useGoogleLogin } from "@react-oauth/google";
 
 const Login = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -48,6 +49,16 @@ const Login = () => {
     }),
   });
 
+  const handleLogin = useGoogleLogin({
+    onSuccess: (tokenResponse) => {
+      googleVerify(tokenResponse.access_token).then((res: any) => {
+        saveAccessToken(res?.token);
+        saveUser(res?.user);
+        navigate(`/process`);
+        renderSuccess("Welcome Back!");
+      });
+    },
+  });
   return (
     <Layout>
       <div className="flex flex-col items-center w-full pt-[25px] lg:pt-0 gap-4">
@@ -127,7 +138,7 @@ const Login = () => {
                     height="63px"
                     parentClassNames="left-[20px]"
                     block
-                    linkTo="" // pass the path here
+                    onClick={() => handleLogin()}
                   >
                     <img src="/google.png" alt="" />
                     <span>Login in with google</span>
@@ -139,7 +150,7 @@ const Login = () => {
                     width="100%"
                     height="63px"
                     block
-                    linkTo="" // pass the path here
+                    onClick={() => handleLogin()}
                   >
                     <img src="/google.png" alt="" className="w-4" />
                     <span>Log in with google</span>

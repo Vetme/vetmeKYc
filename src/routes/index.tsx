@@ -6,6 +6,8 @@ import Signup from "../pages/Signup";
 import Login from "../pages/Login";
 import Question from "../pages/Questions";
 import Process from "../pages/Process";
+import ProcessKyc from "../pages/ProcessKyc";
+import ProcessKycDone from "../pages/ProcessKycDone";
 import Verify from "../pages/Verify";
 import Index from "../pages/Dashboard/Index";
 import Companies from "../pages/Dashboard/Companies";
@@ -17,6 +19,8 @@ import Notifications from "../pages/Dashboard/Notifications";
 import AdminRoute from "../components/guards/Admin";
 import MemberRoute from "../components/guards/Member";
 import Pricing from "../pages/Pricing";
+import ProcessBasic from "../pages/ProcessBasic";
+import SubPage from "../pages/SubPage";
 
 function AllRoutes() {
   return (
@@ -39,6 +43,25 @@ function AllRoutes() {
               </MemberRoute>
             }
           />
+          <Route
+            path="/process/kyc"
+            element={
+              <MemberRoute>
+                <ProcessKyc />
+              </MemberRoute>
+            }
+          />
+          <Route
+            path="/subscription"
+            element={
+              <MemberRoute>
+                <SubPage />
+              </MemberRoute>
+            }
+          />
+          <Route path="/process/kyc/done" element={<ProcessKycDone />} />
+          <Route path="/process/basic" element={<ProcessBasic />} />
+
           <Route
             path="/dashboard"
             element={
