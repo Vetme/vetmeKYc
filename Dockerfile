@@ -1,13 +1,18 @@
-FROM node:17-alpine
+FROM node:alpine3.16 AS build
 
 WORKDIR /app
 
 COPY package.json .
 
-RUN npm install
+RUN npm install --force
 
 COPY . .
 
-EXPOSE 5173
+RUN npm run build-pro
 
-CMD ['npm','build']
+FROM  nginx:1.23-alpine
+WORKDIR /usr/share/nginx/html
+RUN rm -rf ./*
+COPY --from=build /app/dist .
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+ENTRYPOINT [ "nginx","-g","daemon off;" ]

@@ -52,3 +52,8 @@
 .table-container {
   width: 100%;
 }
+
+.fc-button:disabled {
+  opacity: 0.4;
+  cursor: auto;
+}

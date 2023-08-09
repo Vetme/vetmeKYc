@@ -36,11 +36,13 @@ const useShuftipro = () => {
     script.src = "https://app.shuftipro.com/biometric/sdk/shuftipro.min.js";
     script.async = true;
     elem?.appendChild(script);
+    // callback_url: "https://kyc.requestcatcher.com/test",
 
     let payload: any = {
       reference: `SP_REQUEST_${Math.random()}`,
-      callback_url: "https://kyc.requestcatcher.com/test",
-      redirect_url: "https://kyc.vetmeblock.com/",
+      callback_url:
+        "https://kyc-api.vetmeblock.com/api/v1/kyc/shuftipro/callback",
+      redirect_url: "https://kyc-success.vetmeblock.com/",
       language: "EN",
       verification_mode: "any",
       email: user.email,

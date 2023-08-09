@@ -141,7 +141,7 @@ const Login = () => {
                     onClick={() => handleLogin()}
                   >
                     <img src="/google.png" alt="" />
-                    <span>Login in with google</span>
+                    <span>Login with google</span>
                   </LayeredBtn>
                 </div>
                 <div className="lg:hidden block">

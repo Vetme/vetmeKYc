@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import Layout from "../components/layout/Layout";
 import LayeredBtn from "../components/utils/LayeredBtn";
@@ -8,12 +8,17 @@ import { useAuth } from "../hooks/useAuthProvider";
 import { SHUFTI_PRO_CLIENT_ID, SHUFTI_PRO_SECRET_KEY } from "../lib/constants";
 import { getCurrentUser } from "../service/auth.service";
 import Button from "../components/utils/Button";
-import { startKyc, validateKycCode } from "../service/kyc.service";
+import {
+  generateCertificate,
+  startKyc,
+  validateKycCode,
+} from "../service/kyc.service";
 import { renderError, renderSuccess } from "../service/alert.service";
 import { Copy } from "../components/icons";
 import { Flex } from "../components";
 import Modal from "../components/utils/modal";
 import { CodeInput } from "./styles";
+import CertificationModal from "../components/utils/modal/Certification";
 
 enum CustomTabs {
   KYC_VERIFICATION = "Kyc verification",
@@ -42,12 +47,62 @@ const Process = () => {
   const [open, setOpen] = useState<boolean>(false);
   const [code, setCode] = useState<string>("");
   const [users, setUsers] = useState<any>([]);
+  const [popup, setPopup] = useState<boolean>(false);
+  const [certificateGenerationStage, setCertificateGenerationStage] = useState({
+    generating: false,
+    generated: false,
+  });
+
+  const handleShowPopup = () => {
+    setPopup(!popup);
+  };
+
+  const handlePrint = async () => {
+    setPopup(!popup);
+
+    setCertificateGenerationStage({
+      ...certificateGenerationStage,
+      generating: true,
+      generated: false,
+    });
+    try {
+      const res = await generateCertificate();
+      setTimeout(() => {
+        setCertificateGenerationStage({
+          ...certificateGenerationStage,
+          generating: false,
+          generated: true,
+        });
+
+        const link = document.createElement("a");
+
+        const file = new Blob([res as any], { type: "application/pdf" });
+        let fileURL = URL.createObjectURL(file);
+        link.href = fileURL;
+        // window.open(fileURL);
+        link.setAttribute("download", "certificate.pdf");
+        document.body.appendChild(link);
+        link.click();
+      }, 3000);
+    } catch (err) {
+    } finally {
+      setTimeout(() => {
+        setCertificateGenerationStage({
+          ...certificateGenerationStage,
+          generating: false,
+          generated: false,
+        });
+      }, 6000);
+    }
+  };
 
   let navigate = useNavigate();
+  let params = useParams();
 
   useEffect(() => {
     getUser();
-  }, []);
+    console.log(params, "hello");
+  }, [navigate.name]);
 
   const getUser = async () => {
     try {
@@ -94,6 +149,9 @@ const Process = () => {
 
   return (
     <Layout>
+      <CertificationModal
+        {...{ popup, certificateGenerationStage, handleShowPopup, handlePrint }}
+      />
       {user.kyc_enabled ? (
         // <div className=" w-full gap-4">
         //   <CTabs className="pricing">
@@ -167,7 +225,14 @@ const Process = () => {
                         </td>
                         <td className="px-6 py-6">
                           <div>
-                            <Button text="Continue" to="/process/basic" />
+                            {kyc.is_verified ? (
+                              <Button
+                                text="Download Certificate"
+                                onClick={() => setPopup(true)}
+                              />
+                            ) : (
+                              <Button text="Continue" to="/process/basic" />
+                            )}
                           </div>
                         </td>
                       </tr>

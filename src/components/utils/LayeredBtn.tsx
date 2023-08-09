@@ -12,6 +12,8 @@ interface Props {
   onClick?: () => void;
   block?: boolean;
   type?: any;
+  loading?: boolean;
+  disabled?: boolean;
 }
 
 const LayeredBtn = ({
@@ -21,6 +23,8 @@ const LayeredBtn = ({
   linkTo = "#",
   children,
   parentClassNames,
+  loading,
+  disabled,
   lDir,
   block,
   onClick,
@@ -33,7 +37,8 @@ const LayeredBtn = ({
       onClick={onClick}
       className={`relative block cursor-pointer ${parentClassNames} ${
         block && "w-full"
-      }`}
+      } fc-button`}
+      disabled={loading || disabled}
     >
       <div
         className={`bg-white flex items-center justify-center uppercase 
