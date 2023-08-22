@@ -139,11 +139,11 @@ const Home = () => {
                     width="147px"
                     height="46px"
                     parentClassNames="w-auto"
+                    onClick={() => {
+                      window.location.href = "https://t.me/vetmeportal";
+                    }}
                   >
-                    <span
-                      onClick={() => setOpenInfo(true)}
-                      className="text-[#170728] text-[0.87em]"
-                    >
+                    <span className="text-[#170728] text-[0.87em]">
                       Contact
                     </span>
                   </LayeredBtn>

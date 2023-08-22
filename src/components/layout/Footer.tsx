@@ -12,7 +12,7 @@ const Footer = () => {
         <span>{"{Facebook}"}</span>
         <span>{"{Twitter}"}</span>
       </div>
-      <div className="copy">vetme ©2022</div>
+      <div className="copy">vetMe ©2023</div>
     </footer>
   );
 };

@@ -41,7 +41,7 @@ const useShuftipro = () => {
     let payload: any = {
       reference: `SP_REQUEST_${Math.random()}`,
       callback_url:
-        "https://kyc-api.vetmeblock.com/api/v1/kyc/shuftipro/callback",
+        "kyc-api.vetemeblock.com",
       redirect_url: "https://kyc-success.vetmeblock.com/",
       language: "EN",
       verification_mode: "any",
