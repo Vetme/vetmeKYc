@@ -108,7 +108,7 @@ const Home = () => {
               <HDetails className="flex-1 sm:w-1/2 w-full">
                 <h2 className="sm:text-[52px] sm:leading-[67px] text-[42px] leading-[50px]">
                   Unlocking the Future of KYC <br />
-                  with VetMe
+                  with VetMe..
                 </h2>
                 <Spacer height={23} />
                 <Text>
