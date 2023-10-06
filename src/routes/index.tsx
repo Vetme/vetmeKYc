@@ -21,6 +21,7 @@ import MemberRoute from "../components/guards/Member";
 import Pricing from "../pages/Pricing";
 import ProcessBasic from "../pages/ProcessBasic";
 import SubPage from "../pages/SubPage";
+import Widget from "../pages/Widget";
 
 function AllRoutes() {
   return (
@@ -34,6 +35,7 @@ function AllRoutes() {
           <Route path="/verify" element={<Verify />} />
           <Route path="/questions" element={<Question />} />
           <Route path="/pricing" element={<Pricing />} />
+          <Route path="/widget" element={<Widget />} />
 
           <Route
             path="/process"

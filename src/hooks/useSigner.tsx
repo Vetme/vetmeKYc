@@ -9,9 +9,14 @@ export function walletClientToSigner(walletClient: WalletClient) {
     name: chain.name,
     ensAddress: chain.contracts?.ensRegistry?.address,
   };
+
+  let pro = new BrowserProvider(window.ethereum);
+
+  console.log(pro);
+
   const provider = new BrowserProvider(transport, network);
   const signer = new JsonRpcSigner(provider, account.address);
-  return signer;
+  return provider;
 }
 
 /** Hook to convert a viem Wallet Client to an ethers.js Signer. */

@@ -224,7 +224,7 @@ const Personal = ({ next }: { next: () => void }) => {
                 />
               </InputInner>
               {formik.touched && formik.errors.phone && (
-                <span className="error">{formik.errors.phone}</span>
+                <span className="error ">{formik.errors.phone}</span>
               )}
             </InputBox>
 

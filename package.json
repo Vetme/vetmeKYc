@@ -12,6 +12,7 @@
   "dependencies": {
     "@react-oauth/google": "^0.11.0",
     "@types/styled-components": "^5.1.26",
+    "@vetme/widgets": "^1.0.7",
     "@walletconnect/ethereum-provider": "^2.9.0",
     "@walletconnect/modal": "^2.6.0",
     "@web3modal/ethereum": "^2.7.0",
